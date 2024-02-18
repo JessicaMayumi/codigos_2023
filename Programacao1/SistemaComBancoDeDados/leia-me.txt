@@ -1,0 +1,38 @@
+O sistema funciona como um cadastro de restaurantes, cadastrando o NOME, ENDERECO, TELEFONE, CEP, NOTA e ID. Sendo que o ID
+será adicionado automaticamente pelo Banco, não sendo necessário ser adicionado pelo usuário.
+O sistema também contém métodos para cadastrar, alterar os dados(menos o id), listar e excluir todos os dados de um determinado
+restaurante. 
+Além disso o sistema contém uma área restrita, aos quais é possível cadastrar funcionários e, conectá-los aos seus respectivos 
+restaurantes. 
+Existem os mesmos métodos dos restaurantes para os funcionários e, é possivel verificar o cpf de cada funcionário. Verifica-se
+o número de caracteres (14, xxx.xxx.xxx-xx), se é válido e se já não existe nenhum outro cpf igual no banco, mesmo não sendo 
+a PRIMARY KEY.
+
+SENHA Da Área Restrita: 12345
+
+Segue a Estrutura do Banco de Dados:
+
+CREATE SCHEMA IF NOT EXISTS `MAYUMI`;
+
+CREATE TABLE IF NOT EXISTS `MAYUMI`.`RESTAURANTE` (
+  `ID_RESTAURANTE` INT PRIMARY KEY  NOT NULL AUTO_INCREMENT,
+  `NOME` VARCHAR(45) NOT NULL,
+  `ENDERECO` VARCHAR(45) NOT NULL,
+  `TELEFONE` VARCHAR(14) NOT NULL,
+  `CEP` VARCHAR(9) NOT NULL,
+  `NOTA` INT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS `MAYUMI`.`FUNCIONARIO` (
+  `ID_FUNCIONARIO` INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  `CPF` VARCHAR(14) NOT NULL,
+  `NOME` VARCHAR(45) NOT NULL,
+  `CARGO` VARCHAR(20) NOT NULL,
+  `SALARIO` DECIMAL(16,2) NOT NULL,
+  `DATA_DE_CONTRATACAO` DATE NOT NULL,
+  `ID_RESTAURANTE` INT NOT NULL, 
+  CONSTRAINT FOREIGN KEY(ID_RESTAURANTE) REFERENCES RESTAURANTE(ID_RESTAURANTE)
+);
+
+
+Sistema feito por Jessica Mayumi | 201 info | 2023
